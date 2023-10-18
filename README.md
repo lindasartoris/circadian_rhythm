@@ -1,7 +1,7 @@
 # circadian_rhythm
 ### effect of circadian rhythm on organisational immunity
 
-The scripts in this repostitory were created by **Nathalie Stroeymeyt** & **Adriano Wanderlingh** 
+The scripts in this repostitory were created by **Nathalie Stroeymeyt** & [**Adriano Wanderlingh**](https://github.com/AdrianoWanderlingh/Ant_Tracking)
 
 With contribution from **Daniel Schläppi** (in I: "vital_Linda.R") & **Luke Leckie** (in I: "4_CLONING_CAPSULES_Linda.R")
 
