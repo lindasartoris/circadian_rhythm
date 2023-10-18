@@ -11,7 +11,7 @@ With their support I made minor changes to the scripts to make them work for my 
 Manual and automated steps to create myrmidon files containing all relevant metadata (tag orientation, death, treated workers, etc.), capsules (all interactions & grooming) & zones (nest & arena)
 
 ### II_EXP1_base_analysis
-Base analysis script to calculate interactions, trajectories and colony metadata
+Base analysis script to calculate interactions, trajectories and extract colony metadata
 
 ### III_Social_Network_Plasticity_Exp_2022_LS
 Post processing steps to randomise interactions, simulate transmissions, analyse network properties & summarise interactions
