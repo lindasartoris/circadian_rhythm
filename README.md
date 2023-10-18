@@ -7,7 +7,7 @@ With contribution from **Daniel Schläppi** (in I: "vital_Linda.R") & **Luke Lec
 
 With their support I made minor changes to the scripts to make them work for my experimental conditions
 
-### I_changes to myrmidon files
+### I_changes_to_myrmidon_files
 Manual and automated steps to create myrmidon files containing all relevant metadata (tag orientation, death, treated workers, etc.), capsules (all interactions & grooming) & zones (nest & arena)
 
 ### II_EXP1_base_analysis
