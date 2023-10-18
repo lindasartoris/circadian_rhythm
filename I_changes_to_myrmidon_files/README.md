@@ -12,7 +12,7 @@ _Interactions_: “CapsuleDef2018”
  
 _Grooming_: “CapsuleDef3”
  
-Run “1_CAPSULE_ASSIGNEMENT_Linda.R” once for interaction, once for grooming
+Run **“1_CAPSULE_ASSIGNEMENT_Linda.R”** once for interaction, once for grooming
 
 Extract the average ant sizes 
 
@@ -32,7 +32,7 @@ First, only do this for the interaction capsule (Def2018) because we still need 
 
 Based on the “[…]_manual_orientation_CapsuleDef2018.myrmidon” files that exist for one replicate per tracking system
 
-Run “2_AUTO_ORIENT_Linda.R”
+Run **“2_AUTO_ORIENT_Linda.R”**
 
  “[…]_automatically_oriented_CapsuleDef2018.myrmidon”
 
@@ -45,14 +45,14 @@ Move all the extra forager tracking files (those for lost tags, re-tags etc) to 
 
 Adapt the script from “2_AUTO_ORIENT_Linda.R” to create base myrmidon files in “vital_Linda.R”
 
-In “vital_Linda.R” run the section 5.1
+In **“vital_Linda.R”** run the section 5.1
 
 “foragerID_c[xx].myrmidon”
 
 #### 5.2.1 create meta data keys
 Adapt the script from “vital_Daniel.R” to create the meta data keys (is.queen, is.alive, exposed, …) for the “automatically_oriented_Def2018.myrmidon” files
 
-In “vital_Linda.R” run the section 5.2 (5.2.1 meta data keys are created)
+In **“vital_Linda.R”** run the section 5.2 (5.2.1 meta data keys are created)
 
 #### 5.2.2 add treated forager IDs
 This is included in “vital_Linda.R” section 5.2 (5.2.2 exposed forager information is added)
@@ -92,7 +92,7 @@ Also check auto orientation of other ants bc some replicates seem to have had pr
 ### 8. Zoning
 Create the spaces for nest & foraging
 
-Use script “3_CLONE_ZONES_Linda.R” (adapted from the one for Beki by Nathalie)
+Use script **“3_CLONE_ZONES_Linda.R”** (adapted from the one for Beki by Nathalie)
 
 Create the zones once manually for replicate alleline_c05 in workspace “zoning” and use this as a template “[…]_zones_Linda_2023.myrmidon”
 
@@ -105,6 +105,6 @@ Do this once all the relevant meta data and other information is added to the my
 
 Caution: we don’t want to re-create the ants (because of the metadata) nor to auto_orient them again (because of some re-tagging)! Only remove the Def2018 capsules and create Def3 grooming capsules
 
-Use script “4_CLONING_CAPSULES_Linda.R” (adapted from Luke’s script “CAPSULE_REASSIGNMENT_2811_Luke.R”)
+Use script **“4_CLONING_CAPSULES_Linda.R”** (adapted from Luke’s script “CAPSULE_REASSIGNMENT_2811.R”)
 
 “[…]_automatically_oriented_CapsuleDef3_metadata_deaths_q_zones.myrmidon”
