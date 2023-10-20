@@ -1,6 +1,0 @@
-"mean_worker_length_px","TS","myrmidon_file"
-149.548912207563,"polyakov","/home/cf19810/Documents/TEMP/EXPERIMENT_DATA/REP1/R1SP_27-02-21_ManOriented_polyakov-base.myrmidon"
-152.310773304165,"leamas","/home/cf19810/Documents/TEMP/EXPERIMENT_DATA/REP2/R2SP_06-03-21_ManOriented_leamas-base.myrmidon"
-150.390604133251,"prideaux","/home/cf19810/Documents/TEMP/EXPERIMENT_DATA/REP3/R3SP_13-03-21_ManOriented_prideaux-base.myrmidon"
-149.107925491222,"karla","/home/cf19810/Documents/TEMP/EXPERIMENT_DATA/REP7/R7SP_10-04-21_ManOriented_karla-base.myrmidon"
-146.380402245572,"westerby","/home/cf19810/Documents/TEMP/EXPERIMENT_DATA/REP8/R8SP_17-04-21_Oriented_westerby-base.myrmidon"
