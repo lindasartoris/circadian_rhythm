@@ -8,21 +8,8 @@
 # post_start	start of the post-treatment network (Day 2, 9:30 AM/PM)
 # post_end	end of the post-treatment network (Day 2/3, 6:30 AM/PM) 
 
-#some replicates were not started able to start before or at 8 AM/PM 
-#these have to be taken care of individually:
-#DF_haydon_c16 (2022-11-08T08:04:42.205220638Z)
-#NF_haydon_c35 2022-11-22T20:07:34.308587587Z
-#NS_haydon_c48 2022-12-06T20:34:03.213602667Z
 #DS__karla_c13 2022-11-01T09:53:04.400663158Z --> pre_start and pre_end can be shifted by 23 min
-#DF_karla_c45 2022-11-22T08:04:43.331678602Z
-#NF_karla_c60 2022-11-29T20:01:58.962857794Z
-#NS_karla_67 2022-12-06T20:32:07.169920500Z 
-#DS_polyakov_46 2022-11-21T08:00:50.012365123Z
-#DF_polyakov_c69 2022-11-14T08:00:37.129063959Z
-#DF_prideaux_c42 2022-12-05T08:01:56.472733603Z
-#DF_trojan_c20 2022-12-05T08:03:41.367948407Z
-
-#one replicate had a later post_start time because of re-tagging: 09:40:22 - removed and frozen at 18:38 so set post times to 9:38 - 18-38
+#one replicate (c52) had a later post_start time because of re-tagging: 09:40:22 - removed and frozen at 18:38 so set post times to 9:38 - 18-38
 
 rm(list=ls())
 
