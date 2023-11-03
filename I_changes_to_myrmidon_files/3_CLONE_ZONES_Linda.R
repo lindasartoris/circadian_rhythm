@@ -1,5 +1,13 @@
+#################################################################
+########################## CLONE ZONES ##########################
+# Clone zones for nest and arena from one myrmidon file with zones created manually
+# 
+# Script created by Nathalie Stroeymeyt
+# with adaptations by Linda Sartoris
+
 ###compatible with Myrmidon 0.8.3
 
+# LS:
 ###edit data_path #done
 ###create a copy of the myrmidon file that contains the zones and rename it "[...]_zones_Linda_2023" #done
 ###to avoid losing data don't overwrite but create new myrmidon files with ending "[...]_zones"
