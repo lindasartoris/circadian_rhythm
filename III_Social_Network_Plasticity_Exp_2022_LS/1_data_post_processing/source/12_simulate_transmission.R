@@ -6,6 +6,8 @@
 
 ###Created by Nathalie Stroeymeyt
 
+####Adaptations by Adriano Wanderlingh & Linda Sartoris
+
 to_keep_ori <- to_keep
 
 Sys.setenv("PKG_CXXFLAGS"="-std=c++11")
