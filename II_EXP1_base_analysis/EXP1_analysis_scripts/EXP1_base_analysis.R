@@ -1,3 +1,19 @@
+
+#####################################################################################
+############## SUMMARISE INTERACTIONS & EXTRACT TRAJECTORIES ########################
+#####################################################################################
+ 
+#### THIS VERSION IS FORT 0.8.1 COMPATIBLE ####
+ 
+# Script created by Adriano Wanderlingh, with contributions by  Nathalie Stroeymeyt
+# with adaptation by Linda Sartoris
+ 
+#this should be the version of the script maintained for long term use.
+#For previous versions of this script and the sourced one, explore:
+# https://github.com/AdrianoWanderlingh/Ant_Tracking
+
+
+
 rm(list = ls())
 gc() #cleaning memory cache
 Sys.sleep(3) #Suspend execution of R expressions for a specified time interval (in sec)
