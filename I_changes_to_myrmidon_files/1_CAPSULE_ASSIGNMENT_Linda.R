@@ -10,6 +10,11 @@ gc()
 
 #"https://formicidae-tracker.github.io/myrmidon/latest/index.html"
 
+
+# Script created by Adriano Wanderlingh, with contributions by Nathalie Stroeymeyt & Daniel Schläppi
+# with adaptations by Linda Sartoris
+
+
 ######load necessary libraries
 library(FortMyrmidon) ####R bindings
 library(Rcpp)
@@ -31,7 +36,7 @@ dir_data_target   <- "/media/lsartori/LS_1/circadian_rhythm_2022_experiment/trac
 defined_capsule_file <- c(
   paste("/media/lsartori/LS_2/ADRIANO/EXPERIMENT_DATA_EXTRAPOLATED/REP3","CapsuleDef3_R3SP_ManualOriented_base.myrmidon",sep="/")
   #                            ,
-  # paste("/media/lsartori/LS_2/ADRIANO/EXPERIMENT_DATA_EXTRAPOLATED/REP9","CapsuleDef3_R9SP_ManualOriented_base.myrmidon",sep="/")
+  # paste("/media/lsartori/LS_2/ADRIANO/EXPERIMENT_DATA_EXTRAPOLATED/REP9","CapsuleDef3_R9SP_ManualOriented_base.myrmidon",sep="/")  # LS: only use one of the two grooming capsules (bc coordinates have opposite signs and together create wrong shape)
 )
 
 ### manually oriented myrmidon file name
