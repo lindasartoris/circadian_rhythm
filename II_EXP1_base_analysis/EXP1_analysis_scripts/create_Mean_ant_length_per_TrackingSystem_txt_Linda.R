@@ -1,7 +1,10 @@
-#script to change 
-#Mean_ant_length_colonies.txt (originated from script 1_CAPSULE_ASSIGNMENT_Linda)
-#to
-#Mean_ant_length_per_TrackingSystem.txt (for EXP1_base_analysis)
+##########################################################
+############ MATCH MEAN ANT LENGTH FILE TO AW ############
+##########################################################
+
+# Script to change "Mean_ant_length_colonies.txt" (originated from script 1_CAPSULE_ASSIGNMENT_Linda) to match "Mean_ant_length_per_TrackingSystem.txt" (for EXP1_base_analysis)
+# Written by Linda Sartoris
+
 usr <- "lsartori"
 SCRIPTDIR <- paste("/media",usr,"Seagate Portable Drive/circadian_rhythm_2022_experiment/scripts/EXP1_base_analysis/EXP1_analysis_scripts",sep="/") # "/home/cf19810/Documents/scriptsR/EXP1_base_analysis/EXP1_analysis scripts"
 BEH_FUNCTIONS <-  paste(SCRIPTDIR,"Behavioural_Inference",sep="/")
