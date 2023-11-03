@@ -1,3 +1,5 @@
+####Written by Nathalie Stroeymeyt
+#Linda Sartoris: small modification to adjust for volume of fungal spore suspension
 
 clean <- function(){
   rm(list=ls(envir = .GlobalEnv)[!ls(envir = .GlobalEnv)%in%to_keep], envir = .GlobalEnv)
