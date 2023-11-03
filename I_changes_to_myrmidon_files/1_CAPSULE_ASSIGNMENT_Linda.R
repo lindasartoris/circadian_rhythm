@@ -4,14 +4,14 @@ gc()
 ########################################################################
 ########### CLONE CAPSULES FROM MANUAL TO MANUAL FILES #################
 # CREATE THE MANUALLY ORIENTED BASE FILES
-# Orient 1 large colony per tracking system used (5 total) by hand.
-# pick 1 out of this 5 and, in FortStudio, create a capsule definition for a medium sized ant and replicate the shape for all of the ants of the colony.
-# Copy this capsule for the remaining 4 colonies using Clone_capsule_manual_to_manual.R . The originals of these files have been stored as *.myrmidon.old
+# Orient 1 large colony per tracking system used (9 total) by hand.
+# pick 1 out of this 9 and, in FortStudio, create a capsule definition for a medium sized ant and replicate the shape for all of the ants of the colony.
+# Copy this capsule for the remaining 8 colonies using Clone_capsule_manual_to_manual.R . The originals of these files have been stored as *.myrmidon.old
 
 #"https://formicidae-tracker.github.io/myrmidon/latest/index.html"
 
 
-# Script created by Adriano Wanderlingh, with contributions by Nathalie Stroeymeyt & Daniel Schläppi
+# Script created by Nathalie Stroeymeyt, with contributions by Daniel Schläppi
 # with adaptations by Linda Sartoris
 
 
