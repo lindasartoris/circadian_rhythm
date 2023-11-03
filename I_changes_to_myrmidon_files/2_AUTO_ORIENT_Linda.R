@@ -1,3 +1,13 @@
+#################################################################
+######################## AUTO ORIENTATION #######################
+# Create the automatically oriented ants with interaction and grooming capsules
+# From manually oriented myrmidon files (1 per tracking system)
+# Start with interaction capsule (Def2018) and create “[…]_automatically_oriented_CapsuleDef2018.myrmidon”
+# Run again for grooming capsules (Def3) after all the meta data was created in Fort Studio
+# 
+# Script created by Nathalie Stroeymeyt
+# with adaptations by Linda Sartoris
+
 rm(list=ls())
 
 #"https://formicidae-tracker.github.io/myrmidon/latest/index.html"
