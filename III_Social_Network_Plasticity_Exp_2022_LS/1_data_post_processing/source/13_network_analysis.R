@@ -5,6 +5,8 @@
 ###Created by Nathalie Stroeymeyt
 ###Modified by Adriano Wanderlingh to work with FORT formicidae Tracking data. Mods tagged with the comment "AW". script wide mods cited here below.
 ###Modified by Nathalie Stroeymeyt to include number of events in addition to duration
+###with adaptations by Linda Sartoris
+
 
 #Script wide mods AW
 # - replaced before/after with pre/post
