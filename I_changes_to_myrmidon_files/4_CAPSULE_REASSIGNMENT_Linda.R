@@ -1,5 +1,10 @@
-#to clone the grooming capsules Def3 onto the newest myrmidon files (incl. metadata and re-orientation wherever necessary)
-#remove Def2018 and add Def3
+#################################################################
+##################### CAPSULE REASSIGNMENT ######################
+# Clone the grooming capsules Def3 onto the newest myrmidon files (incl. metadata and re-orientation wherever necessary)
+# Remove Def2018 and add Def3
+#
+# Base script created by Nathalie Stroeymeyt, with changes for capsule reassignment made by Luke Leckie
+# with adaptations by Linda Sartoris
 
 rm(list=ls())
 gc()
