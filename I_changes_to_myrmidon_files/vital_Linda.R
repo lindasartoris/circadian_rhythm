@@ -1,5 +1,14 @@
+#############################################
+############## ADD META DATA ################
+# Create meta data keys
+# Add information on how is an exposed forager
+#
+# Script created by Daniel Schläppi https://github.com/d-schlaeppi/vital_rscripts_git/blob/main/vital.R
+# with adaptation by Linda Sartoris (based on “2_AUTO_ORIENT_Linda.R”)
+
+
 #be aware that myrmidon file names might have changed
-#treatment (DF, DS, NF or NS) was added to the myrmidon file name [treatment]_[tracking system]_[colony]
+# LS: treatment (DF, DS, NF or NS) was added to the myrmidon file name [treatment]_[tracking system]_[colony]
 
 
 #### prerequisites ####
