@@ -1,5 +1,17 @@
+#########################################################
+################## GET ANT TASK #########################
+#########################################################
+ 
+#### THIS VERSION IS FORT 0.8.1 COMPATIBLE ####
+ 
+# Script created by Adriano Wanderlingh, with contributions by  Nathalie Stroeymeyt
+# AntTasks_Linda was created by NS for Linda Sartoris
 
-################## GET ANT TASK ###################################
+
+#this should be the version of the script maintained for long term use.
+#For previous versions of this script and the sourced one, explore:
+# https://github.com/AdrianoWanderlingh/Ant_Tracking
+
 
 #### THIS SCRIPT IS USED INSIDE:
 # #### - Extract_Metadata_v082.R
