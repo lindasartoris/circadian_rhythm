@@ -2,6 +2,15 @@
 ################## COMPUTE INTERACTIONS ##########################
 ##################################################################
 
+##### THIS VERSION IS FORT 0.8.1 COMPATIBLE ####
+ 
+# Script created by Adriano Wanderlingh, with contributions by  Nathalie Stroeymeyt
+# one addition by Linda Sartoris to order IF_frames$time
+ 
+#this should be the version of the script maintained for long term use.
+#For previous versions of this script and the sourced one, explore:
+# https://github.com/AdrianoWanderlingh/Ant_Tracking
+
 # it requires a "gap" to be defined, should be required by the function
 # Gap is 10 seconds as these are interactions (he maximum gap in tracking before cutting the trajectory or interactions in two different object.)
 compute_Interactions <- function(e, start, end, max_time_gap) { # min_cum_duration , link_type, nest_focus, frm_rate
