@@ -1,5 +1,17 @@
+#######################################################
+############## GET ZONES usage ########################
+#######################################################
+ 
+#### THIS VERSION IS FORT 0.8.1 COMPATIBLE ####
+ 
+# Script created by Adriano Wanderlingh, with contributions by  Nathalie Stroeymeyt
+# with adaptations by Linda Sartoris
+ 
+#this should be the version of the script maintained for long term use.
+#For previous versions of this script and the sourced one, explore:
+# https://github.com/AdrianoWanderlingh/Ant_Tracking
 
-################## GET ZONES usage ###################################
+
 SpaceUse <- function(e, start, end){
   
   #required packages
