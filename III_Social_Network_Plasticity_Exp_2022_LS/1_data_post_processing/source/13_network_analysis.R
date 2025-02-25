@@ -5,8 +5,6 @@
 ###Created by Nathalie Stroeymeyt
 ###Modified by Adriano Wanderlingh to work with FORT formicidae Tracking data. Mods tagged with the comment "AW". script wide mods cited here below.
 ###Modified by Nathalie Stroeymeyt to include number of events in addition to duration
-###with adaptations by Linda Sartoris
-
 
 #Script wide mods AW
 # - replaced before/after with pre/post
@@ -38,6 +36,13 @@ if (!grepl("survival",data_path)){
 
 queen_community_summary <- NULL
 to_keep <- c(ls(),"to_keep","input_folder","network_files","options","option","summary_collective","summary_individual","outputfolder","network_file","queenid", "edge_weights")
+
+# LS: addition by Adriano (Email 14.08.2023)
+# if grooming perform only on observed cases
+if(grepl("grooming", input_path)){
+  input_folders <- grep("observed", input_folders, value = TRUE)
+}
+
 for (input_folder in input_folders){
   print(input_folder)
   setwd(input_path)
@@ -58,7 +63,7 @@ for (input_folder in input_folders){
     
     summary_collective <- NULL
     summary_individual <- NULL
-    for (network_file in network_files){
+    for (network_file in network_files){  # network_file <- network_files[1]
       # network_file <- "PostTreatment/observed/colony05BP_pathogen.big_PostTreatment_TH6_TD18_interactions.txt"
 
       # #### TEMPORARY EXCLUSION OF "PreTreatment/observed/colony08BP_pathogen.big_PreTreatment_TH-12_TD0_interactions.txt" as:
@@ -72,14 +77,37 @@ for (input_folder in input_folders){
       
       cat("\r",network_file)
       ####get file metadata
-      root_name          <- gsub("_interactions.txt","",unlist(strsplit(network_file,split="/"))[grepl("interactions",unlist(strsplit(network_file,split="/")))]) # LS: replace grepl("colony", ...) with grepl("interactions")
-      components         <- unlist(strsplit(root_name,split="_"))
-      # colony             <- components[grepl("colony",components)]
-      colony             <- unlist(strsplit(root_name,split="_"))[1] # LS
-      treatment          <- info[which(info$colony==colony),"treatment"] #AW: no need for as.numeric() 
-      treatment_circadian<- unlist(strsplit(unlist(strsplit(root_name,split="_"))[2],split="\\."))[2] # LS
-      colony_size        <- info[which(info$colony==colony),"colony_size"]
       
+      # LS: because I had to replace grepl("colony"...) with"interactions" I have to adjust this for the grooming scripts (those end in "inferred.txt" instead of "interactions.txt")
+      
+      if (grepl("grooming",data_path)){
+        root_name          <- gsub("_inferred.txt","",unlist(strsplit(network_file,split="/"))[grepl("inferred",unlist(strsplit(network_file,split="/")))]) # LS: replace grepl("interactions", ...) with grepl("inferred")
+        components         <- unlist(strsplit(root_name,split="_"))
+        # colony             <- components[grepl("colony",components)]
+        colony             <- unlist(strsplit(root_name,split="_"))[1] # LS
+        treatment          <- info[which(info$colony==colony),"treatment"] #AW: no need for as.numeric() 
+        treatment_circadian<- unlist(strsplit(unlist(strsplit(root_name,split="_"))[2],split="\\."))[2] # LS
+        colony_size        <- info[which(info$colony==colony),"colony_size"]
+        
+      }else{
+        root_name          <- gsub("_interactions.txt","",unlist(strsplit(network_file,split="/"))[grepl("interactions",unlist(strsplit(network_file,split="/")))]) # LS: replace grepl("colony", ...) with grepl("interactions")
+        components         <- unlist(strsplit(root_name,split="_"))
+        # colony             <- components[grepl("colony",components)]
+        colony             <- unlist(strsplit(root_name,split="_"))[1] # LS
+        treatment          <- info[which(info$colony==colony),"treatment"] #AW: no need for as.numeric() 
+        treatment_circadian<- unlist(strsplit(unlist(strsplit(root_name,split="_"))[2],split="\\."))[2] # LS
+        colony_size        <- info[which(info$colony==colony),"colony_size"]
+        
+      }
+      
+      # root_name          <- gsub("_interactions.txt","",unlist(strsplit(network_file,split="/"))[grepl("interactions",unlist(strsplit(network_file,split="/")))]) # LS: replace grepl("colony", ...) with grepl("interactions")
+      # components         <- unlist(strsplit(root_name,split="_"))
+      # # colony             <- components[grepl("colony",components)]
+      # colony             <- unlist(strsplit(root_name,split="_"))[1] # LS
+      # treatment          <- info[which(info$colony==colony),"treatment"] #AW: no need for as.numeric() 
+      # treatment_circadian<- unlist(strsplit(unlist(strsplit(root_name,split="_"))[2],split="\\."))[2] # LS
+      # colony_size        <- info[which(info$colony==colony),"colony_size"]
+      # 
       if (!all(!grepl("PreTreatment",components))){period <- "pre"}else{period <- "post"} 
       
       # LS: add period_detail so it can be added in extra column later

@@ -7,7 +7,6 @@
 ###Created by Nathalie Stroeymeyt
 ###Modified by Adriano Wanderlingh to work with FORT formicidae Tracking data. Mods tagged with the comment "AW". script wide mods cited here below.
 ###Modified by Nathalie Stroeymeyt to include number of events in addition to duration
-###with adaptations by Linda Sartoris
 
 #Script wide mods AW
 # - replaced before/after with pre/post
@@ -44,15 +43,37 @@ for (input_folder in input_folders){ ### LS: change this back so it iterates thr
   for (network_file in network_files){
     # network_file <- network_files[1] # temp
     cat("\r",network_file)
-    ####get file metadata
-    root_name          <- gsub("_interactions.txt","",unlist(strsplit(network_file,split="/"))[grepl("interactions",unlist(strsplit(network_file,split="/")))])  # LS: replace grepl("colony", ...) with grepl("interactions")
-    components         <- unlist(strsplit(root_name,split="_"))
-    # colony             <- components[grepl("colony",components)]
-    colony             <- unlist(strsplit(root_name,split="_"))[1] # LS
-    treatment          <- info[which(info$colony==colony),"treatment"] #AW: no need for as.numeric() 
-    treatment_circadian<- unlist(strsplit(unlist(strsplit(root_name,split="_"))[2],split="\\."))[2] # LS
-    colony_size        <- info[which(info$colony==colony),"colony_size"]
     
+    # LS: because I had to replace grepl("colony"...) with"interactions" I have to adjust this for the grooming scripts (those end in "inferred.txt" instead of "interactions.txt")
+    
+    if (grepl("grooming",data_path)){
+      root_name          <- gsub("_inferred.txt","",unlist(strsplit(network_file,split="/"))[grepl("inferred",unlist(strsplit(network_file,split="/")))]) # LS: replace grepl("interactions", ...) with grepl("inferred")
+      components         <- unlist(strsplit(root_name,split="_"))
+      # colony             <- components[grepl("colony",components)]
+      colony             <- unlist(strsplit(root_name,split="_"))[1] # LS
+      treatment          <- info[which(info$colony==colony),"treatment"] #AW: no need for as.numeric() 
+      treatment_circadian<- unlist(strsplit(unlist(strsplit(root_name,split="_"))[2],split="\\."))[2] # LS
+      colony_size        <- info[which(info$colony==colony),"colony_size"]
+      
+    }else{
+      root_name          <- gsub("_interactions.txt","",unlist(strsplit(network_file,split="/"))[grepl("interactions",unlist(strsplit(network_file,split="/")))]) # LS: replace grepl("colony", ...) with grepl("interactions")
+      components         <- unlist(strsplit(root_name,split="_"))
+      # colony             <- components[grepl("colony",components)]
+      colony             <- unlist(strsplit(root_name,split="_"))[1] # LS
+      treatment          <- info[which(info$colony==colony),"treatment"] #AW: no need for as.numeric() 
+      treatment_circadian<- unlist(strsplit(unlist(strsplit(root_name,split="_"))[2],split="\\."))[2] # LS
+      colony_size        <- info[which(info$colony==colony),"colony_size"]
+      
+    }
+    # ####get file metadata
+    # root_name          <- gsub("_interactions.txt","",unlist(strsplit(network_file,split="/"))[grepl("interactions",unlist(strsplit(network_file,split="/")))])  # LS: replace grepl("colony", ...) with grepl("interactions")
+    # components         <- unlist(strsplit(root_name,split="_"))
+    # # colony             <- components[grepl("colony",components)]
+    # colony             <- unlist(strsplit(root_name,split="_"))[1] # LS
+    # treatment          <- info[which(info$colony==colony),"treatment"] #AW: no need for as.numeric() 
+    # treatment_circadian<- unlist(strsplit(unlist(strsplit(root_name,split="_"))[2],split="\\."))[2] # LS
+    # colony_size        <- info[which(info$colony==colony),"colony_size"]
+    # 
     if (!all(!grepl("PreTreatment",components))){period <- "pre"}else{period <- "post"} 
     time_hours         <- as.numeric(gsub("TH","",components[which(grepl("TH",components))]))
     time_of_day        <- as.numeric(gsub("TD","",components[which(grepl("TD",components))]))
@@ -172,7 +193,7 @@ for (input_folder in input_folders){ ### LS: change this back so it iterates thr
     full_table           <- full_table[c("tag","age","task_group","status","partner_status","duration_min","number_contacts")]
     summary_interactions <- rbind(summary_interactions,data.frame(randy=input_folder,colony=colony,colony_size=colony_size,treatment=treatment,period=period,period_detail=period_detail,period_circadian=period_circadian,time_hours=time_hours,time_of_day=time_of_day,full_table,stringsAsFactors = F)) # LS: add period_detail & period_circadian
     
-    if (grepl("grooming",input_path)){ # LS: did not check/change this part yet
+    if (grepl("grooming",input_path)){ # 
       #####2. continue calculations for pre vs post
       interactions[which(interactions$Actor%in%colony_treated),"status_Actor"] <- "treated"
       interactions[which(interactions$Receiver%in%colony_treated),"status_Receiver"] <- "treated"
@@ -185,69 +206,69 @@ for (input_folder in input_folders){ ### LS: change this back so it iterates thr
       
       try(aggregated1                 <- aggregate(na.rm=T,na.action="na.pass",cbind(duration_min,N)~Receiver,FUN=sum,data=interactions),silent=T)
       if(exists("aggregated1")){
-        names(aggregated1)          <- c("tag","duration_grooming_received_min","number_contacts_received")
+        names(aggregated1)          <- c("tag","duration_grooming_received_min","number_grooming_contacts_received") # LS: change "number_contacts_received" to include "grooming"
         full_table                  <- merge(full_table,aggregated1,all.x=T,all.y=T)
         full_table[is.na(full_table$duration_grooming_received_min),"duration_grooming_received_min"] <- 0
-        full_table[is.na(full_table$number_contacts_received),"number_contacts_received"] <- 0
+        full_table[is.na(full_table$number_grooming_contacts_received),"number_grooming_contacts_received"] <- 0
       }else{
         full_table$duration_grooming_received_min <- 0 
-        full_table$number_contacts_received <- 0
+        full_table$number_grooming_contacts_received <- 0
       }
       
       try(aggregated2                 <- aggregate(na.rm=T,na.action="na.pass",cbind(duration_min,N)~Actor,FUN=sum,data=interactions[which(interactions$status_Receiver=="treated"),]),silent=T)
       if(exists("aggregated2")){
-        names(aggregated2)          <- c("tag","duration_grooming_given_to_treated_min","number_contacts_given_to_treated")
+        names(aggregated2)          <- c("tag","duration_grooming_given_to_treated_min","number_grooming_contacts_given_to_treated")
         full_table                  <- merge(full_table,aggregated2,all.x=T,all.y=T)
         full_table[is.na(full_table$duration_grooming_given_to_treated_min),"duration_grooming_given_to_treated_min"] <- 0
-        full_table[is.na(full_table$number_contacts_given_to_treated),"number_contacts_given_to_treated"] <- 0
+        full_table[is.na(full_table$number_grooming_contacts_given_to_treated),"number_grooming_contacts_given_to_treated"] <- 0
       }else{
         full_table$duration_grooming_given_to_treated_min <- 0 
-        full_table$number_contacts_given_to_treated <- 0 
+        full_table$number_grooming_contacts_given_to_treated <- 0 
       }
       
       
-      try(aggregated3                 <- aggregate(na.rm=T,na.action="na.pass",c(duration_min,N)~Receiver,FUN=sum,data=interactions[which(interactions$ant1.zones==1),]),silent=T)
+      try(aggregated3                 <- aggregate(na.rm=T,na.action="na.pass",cbind(duration_min,N)~Receiver,FUN=sum,data=interactions[which(interactions$ant1.zones==1),]),silent=T) # fixed bug (9.10.24) - cbind() instead of just c()
       if(exists("aggregated3")){
-        names(aggregated3)          <- c("tag","duration_grooming_received_min_zone1","number_contacts_received_zone1")
+        names(aggregated3)          <- c("tag","duration_grooming_received_min_zone1","number_grooming_contacts_received_zone1")
         full_table                  <- merge(full_table,aggregated3,all.x=T,all.y=T)
         full_table[is.na(full_table$duration_grooming_received_min_zone1),"duration_grooming_received_min_zone1"] <- 0
-        full_table[is.na(full_table$number_contacts_received_zone1),"number_contacts_received_zone1"] <- 0
+        full_table[is.na(full_table$number_grooming_contacts_received_zone1),"number_grooming_contacts_received_zone1"] <- 0
       }else{
         full_table$duration_grooming_received_min_zone1 <- 0 
-        full_table$number_contacts_received_zone1 <- 0 
+        full_table$number_grooming_contacts_received_zone1 <- 0 
       }
       
       try(aggregated4                 <- aggregate(na.rm=T,na.action="na.pass",cbind(duration_min,N)~Actor,FUN=sum,data=interactions[which(interactions$ant1.zones==1&interactions$status_Receiver=="treated"),]),silent=T)
       if(exists("aggregated4")){
-        names(aggregated4)          <- c("tag","duration_grooming_given_to_treated_min_zone1","number_contacts_given_to_treated_zone1")
+        names(aggregated4)          <- c("tag","duration_grooming_given_to_treated_min_zone1","number_grooming_contacts_given_to_treated_zone1")
         full_table                  <- merge(full_table,aggregated4,all.x=T,all.y=T)
         full_table[is.na(full_table$duration_grooming_given_to_treated_min_zone1),"duration_grooming_given_to_treated_min_zone1"] <- 0
-        full_table[is.na(full_table$number_contacts_given_to_treated_zone1),"number_contacts_given_to_treated_zone1"] <- 0
+        full_table[is.na(full_table$number_grooming_contacts_given_to_treated_zone1),"number_grooming_contacts_given_to_treated_zone1"] <- 0
       }else{
         full_table$duration_grooming_given_to_treated_min_zone1 <- 0 
-        full_table$number_contacts_given_to_treated_zone1 <- 0 
+        full_table$number_grooming_contacts_given_to_treated_zone1 <- 0 
       }
       
       try(aggregated5                 <- aggregate(na.rm=T,na.action="na.pass",cbind(duration_min,N)~Receiver,FUN=sum,data=interactions[which(interactions$ant1.zones==2),]),silent=T)
       if(exists("aggregated5")){
-        names(aggregated5)          <- c("tag","duration_grooming_received_min_zone2","number_contacts_received_zone2")
+        names(aggregated5)          <- c("tag","duration_grooming_received_min_zone2","number_grooming_contacts_received_zone2")
         full_table                  <- merge(full_table,aggregated5,all.x=T,all.y=T)
         full_table[is.na(full_table$duration_grooming_received_min_zone2),"duration_grooming_received_min_zone2"] <- 0
-        full_table[is.na(full_table$number_contacts_received_zone2),"number_contacts_received_zone2"] <- 0
+        full_table[is.na(full_table$number_grooming_contacts_received_zone2),"number_grooming_contacts_received_zone2"] <- 0
       }else{
         full_table$duration_grooming_received_min_zone2 <- 0 
-        full_table$number_contacts_received_zone2 <- 0 
+        full_table$number_grooming_contacts_received_zone2 <- 0 
       }
       
       try(aggregated6                 <- aggregate(na.rm=T,na.action="na.pass",cbind(duration_min,N)~Actor,FUN=sum,data=interactions[which(interactions$ant1.zones==2&interactions$status_Receiver=="treated"),]),silent=T)
       if(exists("aggregated6")){
-        names(aggregated6)          <- c("tag","duration_grooming_given_to_treated_min_zone2","number_contacts_given_to_treated_zone2")
+        names(aggregated6)          <- c("tag","duration_grooming_given_to_treated_min_zone2","number_grooming_contacts_given_to_treated_zone2")
         full_table                  <- merge(full_table,aggregated6,all.x=T,all.y=T)
         full_table[is.na(full_table$duration_grooming_given_to_treated_min_zone2),"duration_grooming_given_to_treated_min_zone2"] <- 0
-        full_table[is.na(full_table$number_contacts_given_to_treated_zone2),"number_contacts_given_to_treated_zone2"] <- 0
+        full_table[is.na(full_table$number_grooming_contacts_given_to_treated_zone2),"number_grooming_contacts_given_to_treated_zone2"] <- 0
       }else{
         full_table$duration_grooming_given_to_treated_min_zone2 <- 0 
-        full_table$number_contacts_given_to_treated_zone2 <- 0 
+        full_table$number_grooming_contacts_given_to_treated_zone2 <- 0 
       }
       
       full_table                  <- merge(full_table,tag[c("tag","group")]); names(full_table)[names(full_table)=="group"] <- "status"
@@ -257,7 +278,7 @@ for (input_folder in input_folders){ ### LS: change this back so it iterates thr
       }else{
         full_table                <- merge(full_table,colony_ages,all.x=T,all.y=F)
       }
-      summary_interactions_grooming <- rbind(summary_interactions_grooming,data.frame(randy=input_folder,colony=colony,colony_size=colony_size,treatment=treatment,period=period,time_hours=time_hours,time_of_day=time_of_day,full_table,stringsAsFactors = F)) # LS: add period_detail?
+      summary_interactions_grooming <- rbind(summary_interactions_grooming,data.frame(randy=input_folder,colony=colony,colony_size=colony_size,treatment=treatment,period=period,period_detail=period_detail,period_circadian=period_circadian,time_hours=time_hours,time_of_day=time_of_day,full_table,stringsAsFactors = F)) # LS: add period_detail & period_circadian
       
     }
     
